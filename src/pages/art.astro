@@ -1,20 +1,50 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import { SITE } from "../config/site";
+import { Icon } from "astro-icon/components";
 ---
 
 <MainLayout title={`Art | ${SITE.name}`}>
-  <h1>Art</h1>
+  <section class="page-intro art-intro">
+    <p class="eyebrow">Art</p>
 
-  <p>
-    My research focuses on [theme 1], [theme 2], and [theme 3].
-  </p>
+    <h1>Drawings</h1>
 
-  <h2>Research Themes</h2>
+    <p>
+      Alongside my scientific work, I maintain a drawing practice focused on
+      observation, line, texture, and the expressive possibilities of traditional
+      media.
+    </p>
 
-  <h3>Theme One</h3>
-  <p>Short description.</p>
+    <a
+      class="instagram-link"
+      href={SITE.links.instagram}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Instagram"
+    >
+      <Icon name="simple-icons:instagram" />
+      <span>Instagram</span>
+    </a>
+  </section>
 
-  <h3>Theme Two</h3>
-  <p>Short description.</p>
+  <section class="art-categories">
+    <a class="art-card" href="/art/pencil">
+      <span class="art-card-label">Technique</span>
+      <h2>Pencil</h2>
+      <p>Graphite drawings, studies, and tonal work.</p>
+    </a>
+
+    <a class="art-card" href="/art/pen-ink">
+      <span class="art-card-label">Technique</span>
+      <h2>Pen & Ink</h2>
+      <p>Line-based drawings, ink studies, and textures.</p>
+    </a>
+
+    <a class="art-card" href="/art/portraits">
+      <span class="art-card-label">Subject</span>
+      <h2>Portraits</h2>
+      <p>Portrait drawings and studies of expression, form, and character.</p>
+    </a>
+  </section>
 </MainLayout>

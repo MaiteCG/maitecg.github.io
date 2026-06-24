@@ -23,7 +23,7 @@ import { Icon } from "astro-icon/components";
 
     <div class="hero-icons">
       <a
-        href="https://orcid.org/YOUR-ORCID"
+        href={SITE.links.orcid}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="ORCID"
@@ -32,7 +32,7 @@ import { Icon } from "astro-icon/components";
       </a>
     
       <a
-        href="https://scholar.google.com/..."
+        href={SITE.links.scholar}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Google Scholar"
@@ -41,12 +41,21 @@ import { Icon } from "astro-icon/components";
       </a>
     
       <a
-        href="https://github.com/yourusername"
+        href={SITE.links.github}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="GitHub"
       >
         <Icon name="simple-icons:github" />
+      </a>
+
+      <a
+        href={SITE.links.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="LinkedIn"
+      >
+        <Icon name="simple-icons:linkedin" />
       </a>
     </div>
   </section>

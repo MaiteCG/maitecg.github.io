@@ -191,6 +191,129 @@
     color: var(--text);
   }
 
+  .timeline {
+    margin-top: 4rem;
+  }
+  
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 2rem;
+  
+    padding: 1.5rem 0;
+    border-top: 1px solid #dddddd;
+  }
+  
+  .timeline-year {
+    font-weight: 600;
+    color: var(--accent);
+  }
+  
+  .timeline-content h3 {
+    margin: 0;
+    font-size: 1.05rem;
+  }
+  
+  .timeline-content p {
+    margin-top: 0.4rem;
+    color: var(--muted);
+  }
+
+  .expertise {
+    margin-top: 4rem;
+  }
+  
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  
+    margin-top: 2rem;
+  }
+  
+  .expertise-card {
+    padding: 1.5rem;
+  
+    border-top: 2px solid var(--accent);
+    border-bottom: 1px solid #dddddd;
+  
+    background: transparent;
+  }
+  
+  .expertise-card h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  
+  .expertise-card ul {
+    margin: 0;
+    padding-left: 1rem;
+  }
+  
+  .expertise-card li {
+    margin-bottom: 0.4rem;
+    color: var(--muted);
+  }
+
+  .expertise-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .expertise-tags span {
+    padding: 0.25rem 0.6rem;
+  
+    border: 1px solid #dddddd;
+    border-radius: 999px;
+  
+    font-size: 0.9rem;
+  }
+
+  .professional-development {
+    margin-top: 4rem;
+    padding: 2rem;
+    border-left: 3px solid var(--accent);
+    background: #f4f6f8;
+  }
+  
+  .professional-development h2 {
+    margin-top: 0;
+  }
+  
+  .professional-development > p {
+    color: var(--muted);
+    max-width: 680px;
+  }
+  
+  .training-list {
+    margin-top: 2rem;
+  }
+  
+  .training-item {
+    padding-top: 1.25rem;
+    border-top: 1px solid #d8dce0;
+  }
+  
+  .training-item + .training-item {
+    margin-top: 1.5rem;
+  }
+  
+  .training-item h3 {
+    margin: 0;
+    font-size: 1.05rem;
+  }
+  
+  .training-meta {
+    margin: 0.25rem 0 0.5rem;
+    color: var(--accent);
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
   .profiles {
     margin-top: 4rem;
   }
@@ -292,4 +415,70 @@
   
   .publication-links a:hover {
     text-decoration: underline;
+  }
+
+  /* Art page styles */
+  .art-intro {
+    max-width: 720px;
+  }
+  
+  .instagram-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+  
+    margin-top: 1.5rem;
+  
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .instagram-link svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .instagram-link:hover {
+    opacity: 0.75;
+  }
+  
+  .art-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  
+    margin-top: 4rem;
+  }
+  
+  .art-card {
+    display: block;
+    padding: 1.5rem;
+  
+    border-top: 2px solid var(--accent);
+    border-bottom: 1px solid #dddddd;
+  
+    color: var(--text);
+    text-decoration: none;
+  }
+  
+  .art-card:hover {
+    transform: translateY(-2px);
+  }
+  
+  .art-card-label {
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .art-card h2 {
+    margin: 0.5rem 0;
+    font-size: 1.35rem;
+  }
+  
+  .art-card p {
+    margin: 0;
+    color: var(--muted);
   }
