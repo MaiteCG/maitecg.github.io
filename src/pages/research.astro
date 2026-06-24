@@ -1,19 +1,61 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import { SITE } from "../config/site"; 
 ---
 
-<MainLayout title="Research | Maite Crespo Garcia">
-  <h1>Research</h1>
+<MainLayout title={`Research | ${SITE.name}`}>
+  <section class="page-intro">
+    <h1>Research</h1>
 
-  <p>
-    My research focuses on [theme 1], [theme 2], and [theme 3].
-  </p>
+    <p>
+      My research investigates the neural mechanisms of memory, cognitive
+      control, and healthy ageing, with a particular interest in how brain
+      oscillations support cognition across the lifespan.
+    </p>
+  </section>
 
-  <h2>Research Themes</h2>
+  <section>
+    <h2>Research Themes</h2>
 
-  <h3>Theme One</h3>
-  <p>Short description.</p>
+    <article class="research-theme">
+      <h3>Episodic Memory and Ageing</h3>
+      <p>
+        I study how episodic memory is supported by the brain and how memory
+        processes change across healthy ageing.
+      </p>
+    </article>
 
-  <h3>Theme Two</h3>
-  <p>Short description.</p>
+    <article class="research-theme">
+      <h3>Memory Control</h3>
+      <p>
+        I investigate how people intentionally regulate memory retrieval and
+        suppress unwanted memories.
+      </p>
+    </article>
+
+    <article class="research-theme">
+      <h3>Brain Oscillations and Neural Dynamics</h3>
+      <p>
+        I examine the role of rhythmic brain activity in coordinating memory,
+        attention, and cognitive control processes.
+      </p>
+    </article>
+
+    <article class="research-theme">
+      <h3>Multimodal and Large-Scale Data Analysis</h3>
+      <p>
+        I combine behavioural, electrophysiological, neuroimaging, and brain
+        stimulation methods to study cognition using both experimental and
+        large-scale datasets.
+      </p>
+    </article>
+  </section>
+
+  <section>
+    <h2>Methods</h2>
+    <p>
+      Behavioural experimentation · EEG · MEG · fMRI · intracranial EEG · TMS ·
+      large-scale data analysis
+    </p>
+  </section>
 </MainLayout>

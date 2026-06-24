@@ -1,19 +1,63 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import { SITE } from "../config/site";
+import { Icon } from "astro-icon/components";
 ---
 
-<MainLayout title="Maite Crespo Garcia | Researcher in Cognitive Neuroscience and Visual Artist">
+<MainLayout title={`${SITE.name} | Researcher in Cognitive Neuroscience and Visual Artist`}>
   <section class="hero">
-    <h1>Maite Crespo Garcia</h1>
-    <p>
-      Researcher in Cognitive Neuroscience, working on [short description of your research].
+    <p class="eyebrow">{SITE.role}</p>
+
+    <h1>{SITE.name}</h1>
+
+    <p class="hero-subtitle">
+      Exploring the neural mechanisms of memory, cognitive control, and healthy
+      ageing, with a particular interest in the role of brain oscillations in
+      human cognition.
     </p>
+
+    <p class="hero-methods">
+      Using behavioural experiments, large-scale data analysis, multimodal
+      neuroimaging (EEG, MEG, and fMRI), and non-invasive brain stimulation.
+    </p>
+
+    <div class="hero-icons">
+      <a
+        href="https://orcid.org/YOUR-ORCID"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="ORCID"
+      >
+        <Icon name="simple-icons:orcid" />
+      </a>
+    
+      <a
+        href="https://scholar.google.com/..."
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Google Scholar"
+      >
+        <Icon name="simple-icons:googlescholar" />
+      </a>
+    
+      <a
+        href="https://github.com/yourusername"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub"
+      >
+        <Icon name="simple-icons:github" />
+      </a>
+    </div>
   </section>
 
   <section>
-    <h2>Selected Research</h2>
+    <h2>Research Themes</h2>
     <p>
-      Briefly introduce your main research themes here.
+      <li>Theme 1: Neural mechanisms of memory and cognitive control</li>
+      <li>Theme 2: Brain oscillations and their role in human cognition</li>
+      <li>Theme 3: Healthy ageing and cognitive decline</li>
+
     </p>
   </section>
 

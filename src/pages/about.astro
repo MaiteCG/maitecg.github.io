@@ -1,19 +1,82 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import { SITE } from "../config/site";
+import { Icon } from "astro-icon/components";
 ---
 
-<MainLayout title="About | Maite Crespo Garcia">
-  <h1>About</h1>
+<MainLayout title={`About | ${SITE.name}`}>
+  <section class="page-intro">
+    <h1>About</h1>
 
-  <p>
-    My research focuses on [theme 1], [theme 2], and [theme 3].
-  </p>
+    <p>
+      I am a Postdoctoral Research Associate at the MRC Cognition and Brain
+      Sciences Unit, University of Cambridge, working on projects within CamCAN
+      and the Memory Control Lab.
+    </p>
+  </section>
 
-  <h2>Research Themes</h2>
+  <section class="about-content">
+    <h2>Research profile</h2>
 
-  <h3>Theme One</h3>
-  <p>Short description.</p>
+    <p>
+      My research investigates the brain mechanisms underlying episodic memory,
+      cognitive control, and healthy ageing, with a particular interest in the
+      role of brain oscillations in human cognition.
+    </p>
 
-  <h3>Theme Two</h3>
-  <p>Short description.</p>
+    <p>
+      Since my PhD, I have combined behavioural experimentation with neuroimaging
+      and brain stimulation methods, including intracranial EEG, scalp EEG, MEG,
+      fMRI, and transcranial magnetic stimulation (TMS). I am also interested in
+      advanced analytical approaches for integrating multimodal and large-scale
+      datasets.
+    </p>
+
+    <h2>Biography</h2>
+
+    <p>
+      I earned my PhD in 2013 from the University Pablo de Olavide in Seville,
+      Spain, under the supervision of Mercedes Atienza and José Luis Cantero.
+    </p>
+
+    <p>
+      I then completed a postdoctoral position at the University of Konstanz in
+      Sarang Dalal’s group, where I was also a member of the Zukunftskolleg as a
+      Marie Curie Fellow.
+    </p>
+
+    <p>
+      In 2017, I moved to Cambridge to join the MRC Cognition and Brain Sciences
+      Unit and Michael Anderson’s group, supported by a Newton International
+      Fellowship from the Royal Society. Since 2021, I have held a position as
+      Research Associate.
+    </p>
+  </section>
+
+  <section class="profiles">
+    <h2>Profiles</h2>
+  
+    <ul class="profile-links">
+      <li>
+        <a href={SITE.links.orcid} target="_blank">
+          <Icon name="simple-icons:orcid" />
+          ORCID
+        </a>
+      </li>
+  
+      <li>
+        <a href={SITE.links.scholar} target="_blank">
+          <Icon name="simple-icons:googlescholar" />
+          Google Scholar
+        </a>
+      </li>
+  
+      <li>
+        <a href={SITE.links.github} target="_blank">
+          <Icon name="simple-icons:github" />
+          GitHub
+        </a>
+      </li>
+    </ul>
+  </section>
 </MainLayout>

@@ -1,19 +1,90 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import { SITE } from "../config/site";
+import { parse } from "csv-parse/sync";
+import fs from "node:fs";
+
+type Publication = {
+  year: string;
+  title: string;
+  authors: string;
+  journal: string;
+  doi?: string;
+  pdf?: string;
+  code?: string;
+};
+
+const csv = fs.readFileSync("src/data/publications.csv", "utf-8");
+
+const rawPublications = parse(csv, {
+  columns: true,
+  skip_empty_lines: true,
+  bom: true,
+});
+
+const publications = rawPublications.map((pub: any) => ({
+  year: pub.year || pub.Year || pub.publication_year || pub["Publication Year"] || "Other",
+  title: pub.title || pub.Title,
+  authors: pub.authors || pub.Authors,
+  journal: pub.journal || pub.Journal,
+  doi: pub.doi || pub.DOI,
+  pdf: pub.pdf || pub.PDF,
+  code: pub.code || pub.Code,
+})) as Publication[];
+
+const publicationsByYear: Record<string, Publication[]> = {};
+
+for (const pub of publications) {
+  if (!publicationsByYear[pub.year]) {
+    publicationsByYear[pub.year] = [];
+  }
+
+  publicationsByYear[pub.year].push(pub);
+}
+
+const years = Object.keys(publicationsByYear).sort(
+  (a, b) => Number(b) - Number(a)
+);
+
+function formatDoiUrl(doi?: string) {
+  if (!doi) return "";
+
+  const cleanDoi = doi.trim();
+
+  if (cleanDoi.startsWith("http")) {
+    return cleanDoi;
+  }
+
+  return `https://doi.org/${cleanDoi}`;
+}
 ---
 
-<MainLayout title="Publications | Maite Crespo Garcia">
-  <h1>Publications</h1>
+<MainLayout title={`Publications | ${SITE.name}`}>
+  <section class="page-intro">
+    <h1>Publications</h1>
+    <p>
+      Selected publications on memory, cognitive control, brain oscillations,
+      neuroimaging, and healthy ageing.
+    </p>
+  </section>
 
-  <p>
-    My research focuses on [theme 1], [theme 2], and [theme 3].
-  </p>
+  {years.map((year) => (
+    <section class="publication-year">
+      <h2>{year}</h2>
 
-  <h2>Research Themes</h2>
+      {publicationsByYear[year].map((pub) => (
+        <article class="publication">
+          <h3>{pub.title}</h3>
+        <p class="publication-authors">{pub.authors}</p>
+        <p class="publication-venue">{pub.journal}, {pub.year}</p>
 
-  <h3>Theme One</h3>
-  <p>Short description.</p>
-
-  <h3>Theme Two</h3>
-  <p>Short description.</p>
+          <div class="publication-links">
+            {pub.doi && <a href={formatDoiUrl(pub.doi)} target="_blank">DOI</a>}
+            {pub.pdf && <a href={pub.pdf} target="_blank">PDF</a>}
+            {pub.code && <a href={pub.code} target="_blank">Code</a>}
+          </div>
+        </article>
+      ))}
+    </section>
+  ))}
 </MainLayout>

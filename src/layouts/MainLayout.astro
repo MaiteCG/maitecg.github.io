@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
-const { title = "Maite Crespo Garcia" } = Astro.props;
+import { SITE } from "../config/site";
+const { title = `${SITE.name}` } = Astro.props;
 ---
 
 <!doctype html>
@@ -15,11 +16,11 @@ const { title = "Maite Crespo Garcia" } = Astro.props;
   <body>
     <header>
       <nav>
-        <a href="/">Maite Crespo Garcia</a>
-        <div>
-          <a href="/about/">About</a><br />
-          <a href="/research/">Research</a><br />
-          <a href="/publications/">Publications</a><br />
+        <a href="/">{SITE.name}</a>
+        <div class="nav-links">
+          <a href="/about/">About</a>
+          <a href="/research/">Research</a>
+          <a href="/publications/">Publications</a>
           <a href="/art/">Art</a>
         </div>
       </nav>
@@ -30,7 +31,7 @@ const { title = "Maite Crespo Garcia" } = Astro.props;
     </main>
 
     <footer>
-      <p>© 2026 Maite Crespo Garcia</p>
+      <p>© 2026 {SITE.name}</p>
     </footer>
   </body>
 </html>

@@ -28,7 +28,24 @@
   nav {
     display: flex;
     justify-content: space-between;
-    gap: center;
+    align-items: center;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  nav .site-title {
+    font-weight: 600;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
   
   nav a {
@@ -77,11 +94,202 @@
   }
 
   .hero {
-    padding: 6rem 0 4rem;
+    padding: 6rem 0 5rem;
+  }
+
+  .eyebrow {
+    margin-bottom: 1rem;
+    color: var(--accent);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
   
-  .hero p {
-    max-width: 600px;
-    font-size: 1.25rem;
+  .hero h1 {
+    margin: 0;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+  
+  .hero-subtitle {
+    max-width: 720px;
+    margin-top: 1.5rem;
+    font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+    line-height: 1.45;
+    color: var(--text);
+  }
+  
+  .hero-methods {
+    max-width: 650px;
+    margin-top: 1.25rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
     color: var(--muted);
+  }
+
+  .hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  
+    margin-top: 2rem;
+  }
+  
+  .hero-links a {
+    color: var(--accent);
+  
+    text-decoration: none;
+    font-weight: 500;
+  
+    transition: opacity 0.2s ease;
+  }
+  
+  .hero-links a:hover {
+    opacity: 0.7;
+  }
+
+  .hero-icons {
+    display: flex;
+    gap: 1.25rem;
+  
+    margin-top: 2rem;
+  }
+  
+  .hero-icons a {
+    color: var(--muted);
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    transition: color 0.2s ease,
+                transform 0.2s ease;
+  }
+  
+  .hero-icons a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+  
+  .hero-icons svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* About page styles */
+  .about-content {
+    max-width: 720px;
+  }
+  
+  .about-content h2 {
+    margin-top: 3rem;
+  }
+  
+  .about-content p {
+    color: var(--text);
+  }
+
+  .profiles {
+    margin-top: 4rem;
+  }
+  
+  .profile-links {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+  
+  .profile-links li {
+    margin-bottom: 0.75rem;
+  }
+  
+  .profile-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .profile-links a:hover {
+    color: var(--accent);
+  }
+  
+  .profile-links svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Research page styles */
+  .page-intro {
+    margin-bottom: 4rem;
+  }
+  
+  .page-intro p {
+    max-width: 700px;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  
+  .research-theme {
+    padding: 1.5rem 0;
+    border-top: 1px solid #ddd;
+  }
+  
+  .research-theme h3 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .research-theme p {
+    max-width: 700px;
+    color: var(--muted);
+  }
+
+  /* Publications page styles */
+  .publication-year {
+    margin-top: 3rem;
+  }
+  
+  .publication-year h2 {
+    font-size: 1.2rem;
+    color: var(--accent);
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
+  }
+  
+  .publication {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #e5e5e5;
+  }
+  
+  .publication h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.15rem;
+  }
+  
+  .publication-authors,
+  .publication-venue {
+    margin: 0.25rem 0;
+    color: var(--muted);
+  }
+  
+  .publication-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.75rem;
+  }
+  
+  .publication-links a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .publication-links a:hover {
+    text-decoration: underline;
   }

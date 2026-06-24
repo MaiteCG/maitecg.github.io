@@ -1,8 +1,9 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import { SITE } from "../config/site";
 ---
 
-<MainLayout title="Art | Maite Crespo Garcia">
+<MainLayout title={`Art | ${SITE.name}`}>
   <h1>Art</h1>
 
   <p>
