@@ -1,0 +1,36 @@
+---
+import "../styles/global.css";
+const { title = "Maite Crespo Garcia" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <link rel="stylesheet" href="/styles/global.css" />
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <a href="/">Maite Crespo Garcia</a>
+        <div>
+          <a href="/about/">About</a><br />
+          <a href="/research/">Research</a><br />
+          <a href="/publications/">Publications</a><br />
+          <a href="/art/">Art</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      <p>© 2026 Maite Crespo Garcia</p>
+    </footer>
+  </body>
+</html>
