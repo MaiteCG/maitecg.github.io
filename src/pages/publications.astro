@@ -12,7 +12,25 @@ type Publication = {
   doi?: string;
   pdf?: string;
   code?: string;
+  abstract?: string;
 };
+
+function formatDoiUrl(doi?: string, journal?: string) {
+  if (!doi) return "";
+
+  const cleanDoi = doi.trim();
+  const cleanJournal = journal?.trim().toLowerCase() || "";
+
+  if (cleanDoi.startsWith("http")) {
+    return cleanDoi;
+  }
+
+  if (cleanJournal.includes("biorxiv")) {
+    return `https://www.biorxiv.org/content/${cleanDoi}`;
+  }
+
+  return `https://doi.org/${cleanDoi}`;
+}
 
 const csv = fs.readFileSync("src/data/publications.csv", "utf-8");
 
@@ -22,69 +40,74 @@ const rawPublications = parse(csv, {
   bom: true,
 });
 
-const publications = rawPublications.map((pub: any) => ({
-  year: pub.year || pub.Year || pub.publication_year || pub["Publication Year"] || "Other",
-  title: pub.title || pub.Title,
-  authors: pub.authors || pub.Authors,
-  journal: pub.journal || pub.Journal,
-  doi: pub.doi || pub.DOI,
-  pdf: pub.pdf || pub.PDF,
-  code: pub.code || pub.Code,
-})) as Publication[];
-
-const publicationsByYear: Record<string, Publication[]> = {};
-
-for (const pub of publications) {
-  if (!publicationsByYear[pub.year]) {
-    publicationsByYear[pub.year] = [];
-  }
-
-  publicationsByYear[pub.year].push(pub);
-}
-
-const years = Object.keys(publicationsByYear).sort(
-  (a, b) => Number(b) - Number(a)
-);
-
-function formatDoiUrl(doi?: string) {
-  if (!doi) return "";
-
-  const cleanDoi = doi.trim();
-
-  if (cleanDoi.startsWith("http")) {
-    return cleanDoi;
-  }
-
-  return `https://doi.org/${cleanDoi}`;
-}
+const publications = rawPublications
+  .map((pub: any) => ({
+    year: pub.year || pub.Year || "",
+    title: pub.title || pub.Title || "",
+    authors: pub.authors || pub.Authors || "",
+    journal: pub.journal || pub.Journal || "",
+    doi: pub.doi || pub.DOI || "",
+    pdf: pub.pdf || pub.PDF || "",
+    code: pub.code || pub.Code || "",
+    abstract: pub.abstract || pub.Abstract || "",
+  }))
+  .sort((a: Publication, b: Publication) => Number(b.year) - Number(a.year));
 ---
 
 <MainLayout title={`Publications | ${SITE.name}`}>
   <section class="page-intro">
     <h1>Publications</h1>
-    <p>
-      Selected publications on memory, cognitive control, brain oscillations,
-      neuroimaging, and healthy ageing.
-    </p>
   </section>
 
-  {years.map((year) => (
-    <section class="publication-year">
-      <h2>{year}</h2>
+  <section class="publication-list">
+    {publications.map((pub) => (
+      <article class="publication">
+        <div class="publication-year-inline">{pub.year}</div>
 
-      {publicationsByYear[year].map((pub) => (
-        <article class="publication">
-          <h3>{pub.title}</h3>
-        <p class="publication-authors">{pub.authors}</p>
-        <p class="publication-venue">{pub.journal}, {pub.year}</p>
+        <div class="publication-main">
+          <h2>{pub.title}</h2>
 
-          <div class="publication-links">
-            {pub.doi && <a href={formatDoiUrl(pub.doi)} target="_blank">DOI</a>}
-            {pub.pdf && <a href={pub.pdf} target="_blank">PDF</a>}
-            {pub.code && <a href={pub.code} target="_blank">Code</a>}
+          <p class="publication-authors">{pub.authors}</p>
+
+          <p class="publication-venue">
+            <span class="publication-journal">{pub.journal}.</span>
+            <span> doi: </span>
+            <span class="publication-doi">
+              {pub.doi && (
+                <a
+                  href={formatDoiUrl(pub.doi, pub.journal)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {pub.doi}
+                </a>
+              )}
+            </span>
+          </p>
+
+          <div class="publication-links">            
+
+            {pub.pdf && (
+              <a href={pub.pdf} target="_blank" rel="noopener noreferrer">
+                PDF
+              </a>
+            )}
+
+            {pub.code && (
+              <a href={pub.code} target="_blank" rel="noopener noreferrer">
+                Code
+              </a>
+            )}
           </div>
-        </article>
-      ))}
-    </section>
-  ))}
+
+          {pub.abstract && (
+            <details class="publication-abstract">
+              <summary>Abstract</summary>
+              <p>{pub.abstract}</p>
+            </details>
+          )}
+        </div>
+      </article>
+    ))}
+  </section>
 </MainLayout>

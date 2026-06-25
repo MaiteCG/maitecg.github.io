@@ -5,14 +5,22 @@ import { Icon } from "astro-icon/components";
 ---
 
 <MainLayout title={`About | ${SITE.name}`}>
-  <section class="page-intro">
-    <h1>About</h1>
+  <section class="about-header">
+    <div>
+      <h1>About</h1>
 
-    <p>
-      I am a Postdoctoral Research Associate at the MRC Cognition and Brain
-      Sciences Unit, University of Cambridge, working on projects within CamCAN
-      and the Memory Control Lab.
-    </p>
+      <p class="about-lead">
+        I am a Postdoctoral Research Associate at the MRC Cognition and Brain
+        Sciences Unit, University of Cambridge, working on projects within CamCAN
+        and the Memory Control Lab.
+      </p>
+    </div>
+
+    <img
+      src="/images/profile.jpg"
+      alt="Portrait of Maite Crespo García"
+      class="about-photo"
+    />
   </section>
 
   <section class="about-content">
@@ -53,77 +61,49 @@ import { Icon } from "astro-icon/components";
     </p>
   </section>
 
-  <section class="timeline">
-    <h2>Career Path</h2>
-  
-    <div class="timeline-item">
-      <div class="timeline-year">2021–Present</div>
-  
-      <div class="timeline-content">
-        <h3>Research Associate</h3>
-        <p>MRC Cognition and Brain Sciences Unit, University of Cambridge</p>
-      </div>
-    </div>
-  
-    <div class="timeline-item">
-      <div class="timeline-year">2017–2021</div>
-  
-      <div class="timeline-content">
-        <h3>Newton International Fellow / Postdoctoral Researcher</h3>
-        <p>MRC Cognition and Brain Sciences Unit, University of Cambridge</p>
-      </div>
-    </div>
-  
-    <div class="timeline-item">
-      <div class="timeline-year">2014–2017</div>
-  
-      <div class="timeline-content">
-        <h3>Marie Curie Fellow & Postdoctoral Researcher</h3>
-        <p>University of Konstanz</p>
-      </div>
-    </div>
-  
-    <div class="timeline-item">
-      <div class="timeline-year">2009–2013</div>
-  
-      <div class="timeline-content">
-        <h3>PhD in Neuroscience</h3>
-        <p>University Pablo de Olavide, Seville</p>
-      </div>
-    </div>
-  </section>
-
+ 
+  {/* Methods and expertise section */}
   <section class="expertise">
     <h2>Methods & Expertise</h2>
   
     <div class="expertise-grid">
+
       <div class="expertise-card">
         <h3>💻 Programming</h3>
         <div class="expertise-tags">
           <span>Python</span>
           <span>MATLAB</span>
-          <span>R</span>
-          <span>Bash</span>
         </div>
       </div>
   
       <div class="expertise-card">
-        <h3>🧠 Neuroimaging</h3>
-        <ul>
-          <li>EEG</li>
-          <li>MEG</li>
-          <li>fMRI</li>
-          <li>Intracranial EEG</li>
-        </ul>
+        <h3>🧠 Neuroimaging & Brain Stimulation</h3>
+        <div class="expertise-tags">
+          <span>EEG</span>
+          <span>MEG</span>
+          <span>fMRI</span>
+          <span>Intracranial EEG</span>
+          <span>rTMS</span>
+        </div>
       </div>
   
       <div class="expertise-card">
-        <h3>📊 Analysis</h3>
+        <h3>🛠️ Software</h3>
+        <div class="expertise-tags">
+          <span>FieldTrip</span>
+          <span>SPM12</span>
+          <span>MNE-Python</span>
+        </div>
+      </div>
+
+      <div class="expertise-card wide">
+        <h3>📊 Analytical methods</h3>
         <ul>
-          <li>Signal Processing</li>
-          <li>Machine Learning</li>
-          <li>Statistics</li>
-          <li>Data Integration</li>
+          <li>Time-Frequency Power</li>
+          <li>Phase Synchronization</li>
+          <li>Source Reconstruction (Beamforming)</li>          
+          <li>Parametric Modulation</li>
+          <li>Spectral Parameterization</li>
         </ul>
       </div>
     </div>
@@ -133,27 +113,44 @@ import { Icon } from "astro-icon/components";
     <h2>🤖 Professional Development in AI & Data Science</h2>
   
     <p>
-      I continue to expand my computational profile through recent training in
-      artificial intelligence, machine learning, and data-oriented research
-      methods.
+      I continue to expand my conceptual and practical knowledge of machine learning and the latest advances in artificial intelligence. I am particularly interested in exploring how AI can support research workflows, from data analysis and programming to scientific writing, and how these technologies can be applied to my research in cognitive neuroscience. I am also committed to training in new tools and strategies that contribute to more efficient, transparent, and reproducible scientific practice.
     </p>
   
     <div class="training-list">
       <article class="training-item">
-        <h3>Course or Workshop Title</h3>
-        <p class="training-meta">Provider or Institution · 2026</p>
+        <h3>Applied AI and Data Science Program</h3>
+        <p class="training-meta">MIT Professional Education · Great Learning · 2026</p>
         <p>
-          Brief description of the topics covered, such as machine learning,
-          generative AI, data analysis, or responsible AI.
+          A 14-week program, including theory and practical applications of supervised machine learning, decision trees, time-series analysis, neural networks, computer vision, recommendation systems,  generative AI, prompt engineering, etc.
         </p>
+
+        <div class="publication-links">    
+          <span>See my </span>
+          <a href={SITE.links.eportfolio} target="_blank" rel="noopener noreferrer">
+            ePortfolio
+          </a>
+          <span>for an overview of my evaluated work. </span>
+
+          <a href='/files/Applied AI and Data Science Program Certificate Maite Crespo Garcia.pdf' target="_blank" rel="noopener noreferrer">
+            Certificate
+          </a>
+
+        </div>
       </article>
   
       <article class="training-item">
-        <h3>Course or Workshop Title</h3>
-        <p class="training-meta">Provider or Institution · 2025</p>
+        <h3>Accelerate Programme for Scientific Discovery</h3>
+        <p class="training-meta">Department of Computer Science and Technology · University of Cambridge · 2025-2026</p>
         <p>
-          Brief description of the course or workshop.
+          A series of 1-day workshops providing specialised training in AI techniques, equipping researchers with skills to use machine learning and AI to power their research. I have attended the following workshops:
         </p>
+        <ul>
+          <li>Packaging and Publishing Python Code for Research workshop</li>
+          <li>Hands On AI Workshop</li>  
+          <li>LLM Hands on Workshop</li>
+          <li>Generative AI</li>
+          <li>An Introduction to Docker Workshop</li>
+        </ul>
       </article>
     </div>
   </section>
@@ -163,6 +160,24 @@ import { Icon } from "astro-icon/components";
   
     <ul class="profile-links">
       <li>
+        <a href={SITE.links.mrc_cbu} target="_blank">
+          <img
+            src="/images/MRC_CBU_small_logo.png"
+            alt="MRC Cognition and Brain Sciences Unit"
+            class="profile-icon"
+          />
+          MRC Cognition and Brain Sciences Unit
+        </a> 
+      </li>
+
+      <li>
+        <a href={SITE.links.scholar} target="_blank">
+          <Icon name="simple-icons:googlescholar" />
+          Google Scholar
+        </a>
+      </li>
+
+      <li>
         <a href={SITE.links.orcid} target="_blank">
           <Icon name="simple-icons:orcid" />
           ORCID
@@ -170,9 +185,9 @@ import { Icon } from "astro-icon/components";
       </li>
   
       <li>
-        <a href={SITE.links.scholar} target="_blank">
-          <Icon name="simple-icons:googlescholar" />
-          Google Scholar
+        <a href={SITE.links.linkedin} target="_blank">
+          <Icon name="simple-icons:linkedin" />
+          LinkedIn
         </a>
       </li>
   
@@ -183,12 +198,6 @@ import { Icon } from "astro-icon/components";
         </a>
       </li>
 
-      <li>
-        <a href={SITE.links.linkedin} target="_blank">
-          <Icon name="simple-icons:linkedin" />
-          LinkedIn
-        </a>
-      </li>
     </ul>
   </section>
 </MainLayout>
