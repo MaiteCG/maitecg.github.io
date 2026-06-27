@@ -1,92 +1,156 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import publicationsJson from "../data/publications.json";
 import { SITE } from "../config/site";
-import { parse } from "csv-parse/sync";
-import fs from "node:fs";
+/*import { parse } from "csv-parse/sync";
+import fs from "node:fs";*/
+
 
 type Publication = {
-  year: string;
+  year: string | number;
   title: string;
   authors: string;
   journal: string;
+  venue: string;
+  volume_issue_pages?: string;
   doi?: string;
+  link?: string;
   pdf?: string;
   code?: string;
   abstract?: string;
+  status?: "in_preparation" | "preprint" | "published";
 };
 
-function formatDoiUrl(doi?: string, journal?: string) {
-  if (!doi) return "";
 
-  const cleanDoi = doi.trim();
-  const cleanJournal = journal?.trim().toLowerCase() || "";
+const allPublications = (publicationsJson as Publication[]).sort(
+(a, b) => Number(b.year) - Number(a.year)
+);
 
-  if (cleanDoi.startsWith("http")) {
-    return cleanDoi;
-  }
+const inPreparation = allPublications.filter(
+(pub) => pub.status === "in_preparation"
+);
 
-  if (cleanJournal.includes("biorxiv")) {
-    return `https://www.biorxiv.org/content/${cleanDoi}`;
-  }
+const preprints = allPublications.filter(
+(pub) => pub.status === "preprint"
+);
 
-  return `https://doi.org/${cleanDoi}`;
+const published = allPublications.filter(
+(pub) => !pub.status || pub.status === "published"
+);
+
+function getPublicationLink(pub: Publication) {
+if (pub.link) return pub.link;
+
+if (!pub.doi) return "";
+
+const cleanDoi = pub.doi.trim();
+
+if (cleanDoi.startsWith("http")) {
+  return cleanDoi;
 }
 
-const csv = fs.readFileSync("src/data/publications.csv", "utf-8");
-
-const rawPublications = parse(csv, {
-  columns: true,
-  skip_empty_lines: true,
-  bom: true,
-});
-
-const publications = rawPublications
-  .map((pub: any) => ({
-    year: pub.year || pub.Year || "",
-    title: pub.title || pub.Title || "",
-    authors: pub.authors || pub.Authors || "",
-    journal: pub.journal || pub.Journal || "",
-    doi: pub.doi || pub.DOI || "",
-    pdf: pub.pdf || pub.PDF || "",
-    code: pub.code || pub.Code || "",
-    abstract: pub.abstract || pub.Abstract || "",
-  }))
-  .sort((a: Publication, b: Publication) => Number(b.year) - Number(a.year));
+return `https://doi.org/${cleanDoi}`;
+}
 ---
 
 <MainLayout title={`Publications | ${SITE.name}`}>
-  <section class="page-intro">
-    <h1>Publications</h1>
-  </section>
+<section class="page-intro">
+  <h1>Publications</h1>
+</section>
 
+{inPreparation.length > 0 && (
   <section class="publication-list">
-    {publications.map((pub) => (
+    <h2 class="publication-section-title">In preparation</h2>
+    {inPreparation.map((pub) => (
       <article class="publication">
         <div class="publication-year-inline">{pub.year}</div>
 
         <div class="publication-main">
           <h2>{pub.title}</h2>
+          <p class="publication-authors" set:html={pub.authors}></p>
 
-          <p class="publication-authors">{pub.authors}</p>
+          <!-- There is no venue, journal, or DOI for publications in preparation, so we skip that section. -->
+          {pub.abstract && (
+            <details class="publication-abstract">
+              <summary>Abstract</summary>
+              <p>{pub.abstract}</p>
+            </details>
+          )}
+        </div>
+      </article>
+    ))}
+  </section>
+)}
+
+{preprints.length > 0 && (
+  <section class="publication-list">
+    <h2 class="publication-section-title">Preprints</h2>
+    {preprints.map((pub) => (
+      <article class="publication">
+        <div class="publication-year-inline">{pub.year}</div>
+
+        <div class="publication-main">
+          <h2>{pub.title}</h2>
+          <p class="publication-authors" set:html={pub.authors}></p>
 
           <p class="publication-venue">
-            <span class="publication-journal">{pub.journal}.</span>
-            <span> doi: </span>
-            <span class="publication-doi">
-              {pub.doi && (
-                <a
-                  href={formatDoiUrl(pub.doi, pub.journal)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {pub.doi}
-                </a>
-              )}
-            </span>
+            <span class="publication-journal">{pub.venue || pub.journal}</span>
+            {pub.volume_issue_pages && <span>, {pub.volume_issue_pages}</span>}
+            <span>.</span>
+
+            {pub.doi && (
+              <>
+                <span> DOI: </span>
+                <span class="publication-doi">
+                  <a href={getPublicationLink(pub)} target="_blank" rel="noopener noreferrer">
+                    {pub.doi}
+                  </a>
+                </span>
+              </>
+            )}
           </p>
 
-          <div class="publication-links">            
+          {pub.abstract && (
+            <details class="publication-abstract">
+              <summary>Abstract</summary>
+              <p>{pub.abstract}</p>
+            </details>
+          )}
+        </div>
+      </article>
+    ))}
+  </section>
+)}
 
+{published.length > 0 && (
+  <section class="publication-list">
+    <h2 class="publication-section-title">Published papers</h2>
+    {published.map((pub) => (
+      <article class="publication">
+        <div class="publication-year-inline">{pub.year}</div>
+
+        <div class="publication-main">
+          <h2>{pub.title}</h2>
+          <p class="publication-authors" set:html={pub.authors}></p>
+
+          <p class="publication-venue">
+            <span class="publication-journal">{pub.venue || pub.journal}</span>
+            {pub.volume_issue_pages && <span>, {pub.volume_issue_pages}</span>}
+            <span>.</span>
+
+            {pub.doi && (
+              <>
+                <span> DOI: </span>
+                <span class="publication-doi">
+                  <a href={getPublicationLink(pub)} target="_blank" rel="noopener noreferrer">
+                    {pub.doi}
+                  </a>
+                </span>
+              </>
+            )}
+          </p>
+
+          <div class="publication-links">
             {pub.pdf && (
               <a href={pub.pdf} target="_blank" rel="noopener noreferrer">
                 PDF
@@ -110,4 +174,5 @@ const publications = rawPublications
       </article>
     ))}
   </section>
+)}
 </MainLayout>

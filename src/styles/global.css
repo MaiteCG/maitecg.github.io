@@ -595,6 +595,17 @@ p.pages-names span a {
   }
 }
 
+.publication-section-title {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+
+  /* border-bottom: 1px solid var(--border); */
+
+  color: var(--accent);
+  font-size: 1.25rem;
+}
+
 /* Art page styles */
 .art-intro {
   max-width: 720px;
